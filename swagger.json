@@ -1,0 +1,148 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0", 
+      "title": "Service client - NodeJS",
+      "description": "",
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    },
+    "host": "localhost:5000",
+    "basePath": "/",
+    "tags": [
+      {
+        "name": "Api clients",
+        "description": "API CRUD clients"
+      }
+    ],
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "paths": {
+        "/api/clients": {
+            "get": {
+                "tags": ["API clients"],
+                "summary": "Get all clients in system",
+                "responses": {
+                    "200": {
+                    "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Users"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["API clients"],
+                "description": "Create client",
+                "parameters": {
+                    "firstname": "John",
+                    "lastname": "Doe",
+                    "dni": 10928374,
+                    "age": 30,
+                    "city": "Manizales",
+                    "typeDni": "CC",
+                    "file": "base64",
+                    "schema": {
+                        "$ref": "#/definitions/User"
+                    }
+                },
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "New client is created",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": ["API clients"],
+                "description": "Update client",
+                "parameters": {
+                    "firstname": "John",
+                    "lastname": "Doe",
+                    "dni": 10928374,
+                    "age": 30,
+                    "city": "Manizales",
+                    "typeDni": "CC",
+                    "file": "base64",
+                    "schema": {
+                        "$ref": "#/definitions/User"
+                    }
+                },
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "New client is created",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["API clients"],
+                "description": "Delete client",
+                "security": {
+                    "Bearer": ["eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFuZHJlcyIsImlhdCI6MTYzNTI2NzQ1OCwiZXhwIjoxNjM3ODU5NDU4fQ.cmzGngsmaZlDwCPfve3V87Tk_yW_RcwTuq-KLGGX41Y"]
+                },
+                "parameters": {
+                    "dni": 58348
+                },
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "response": "client deleted"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "User": {
+            "required": ["firstname", "lastname", "dni", "age", "city", "typeDni", "file"],
+            "properties": {
+            "firstname": {
+                "type": "string",
+                "uniqueItems": false
+            },
+            "lastname": {
+                "type": "string",
+                "uniqueItems": false
+            },
+            "dni": {
+                "type": "integer",
+                "uniqueItems": true
+            },
+            "age": {
+                "type": "integer",
+                "uniqueItems": false
+            },
+            "city": {
+                "type": "string"
+            },
+            "typeDni": {
+                "type": "string"
+            },
+            "file": {
+                "type": "string"
+            }
+            }
+        },
+        "Users": {
+            "type": "array",
+            "$ref": "#/definitions/User"
+        }
+    }
+}
