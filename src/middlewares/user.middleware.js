@@ -3,7 +3,7 @@ const { validateEmptyPassowrd, encryptPassword, isAuth } = require('../services/
 
 const validatePasswordValue = (req, res, next) => {
     const { password } = req.body;
-    if(!validateEmptyPassowrd(password)) {
+    if(validateEmptyPassowrd(password)) {
         errors(req, res, 'Contraseña no valida');
     } else {
         const enPassword = encryptPassword(password);

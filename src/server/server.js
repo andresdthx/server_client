@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+
 const clientRouter = require('../components/client/routes');
 const userRouter = require('../components/user/routes');
 
@@ -27,10 +28,11 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 const port = process.env.PORT;
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
 
 
-module.exports = app;
+module.exports = { app, server };

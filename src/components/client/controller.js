@@ -18,6 +18,7 @@ const getClients = async (data) => {
 
     return clients;
 }
+
 const getClient = async (DniNumber) => {
 
     const client = await listOne(DniNumber);

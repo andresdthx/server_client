@@ -13,7 +13,7 @@ const { success } = require('../../network/response');
 const { saveUser, getUser, deleteUser, updateUser } = require('../../microservices/serviceFile');
 
 router.get('/', asyncHandler(async(req, res) => {
-    const clients = await getClients(req.body);
+    const clients = await getClients(req.params);
     const objClients = await readClients(clients, getUser);
     success(req, res, objClients);
 }));

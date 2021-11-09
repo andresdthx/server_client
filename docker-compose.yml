@@ -1,0 +1,57 @@
+version: "3.2"
+
+services: 
+
+  client:
+    build:
+      context: .
+    image: docker-node-client
+    depends_on:
+      - mysql
+    environment:
+      - DB_HOST=mysql-container
+      - DB_USER=root
+      - DB_NAME=practicanode
+      - SERVICE_FILE_HOST=file-container
+    volumes:
+      - ./www/:/var/www/html/
+      - /opt/app/node_modules/
+    ports:
+      - "5000:5000"
+    container_name: client-container
+
+  mysql:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+      - MYSQL_DATABASE= practicanode
+    expose:
+      - "3306"
+    ports:
+      - "3306:3306"
+    container_name: mysql-container
+
+  file:
+    build:
+      context: .
+    image: docker-node-file
+    depends_on:
+      - mongo
+    environment:
+      - MONGODB_HOST=mongo-container
+    volumes:
+      - ./www/:/var/www/html/
+      - /opt/app/node_modules/
+    ports:
+      - "8080:8080"
+    container_name: file-container
+    
+  mongo:
+    image: mongo
+    expose:
+      - "27017"
+    ports:
+      - "27017:27017"
+    container_name: mongo-container
+    
+

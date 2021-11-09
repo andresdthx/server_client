@@ -4,9 +4,9 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"start": "node src/index.js",
-		"dev": "nodemon src/index.js",
-		"test": "jest"
+		"start": "cross-env NODE_ENV=production node src/index.js",
+		"dev": "cross-env  NODE_ENV=development nodemon src/index.js",
+		"test": "cross-env NODE_ENV=test jest --silent --detectOpenHandles test/super.test.js"
 	},
 	"author": "Andres Felipe Canchila",
 	"license": "ISC",
@@ -14,6 +14,7 @@
 		"axios": "^0.24.0",
 		"bcryptjs": "^2.4.3",
 		"cors": "^2.8.5",
+		"cross-env": "^7.0.3",
 		"express": "^4.17.1",
 		"express-async-handler": "^1.2.0",
 		"jsonwebtoken": "^8.5.1",
@@ -24,6 +25,7 @@
 		"swagger-ui-express": "^4.1.6"
 	},
 	"devDependencies": {
-		"jest": "^27.3.1"
+		"jest": "^27.3.1",
+		"supertest": "^6.1.6"
 	}
 }
